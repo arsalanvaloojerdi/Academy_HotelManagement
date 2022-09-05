@@ -7,10 +7,12 @@ namespace HotelManagement.Application.Interfaces.Hotels
 {
     public interface IHotelService
     {
-        Task<IEnumerable<HotelDto>> GetAllHotels();
+        Task<IEnumerable<HotelDto>> GetAllHotelsAsync();
 
         Task<HotelDetailsDto> GetHotelDetailsAsync(Guid id);
 
-        Task RegisterHotel(RegisterHotelDto dto);
+        Task RegisterHotelAsync(RegisterHotelDto dto);
+
+        Task ModifyHotelAsync(ModifyHotelDto dto);
     }
 }

@@ -24,6 +24,12 @@ namespace HotelManagement.Domain.Models.Models.Hotels
 
         public Address Address { get; private set; }
 
+        public void Modify(string name, int stars)
+        {
+            this.Name = name;
+            this.Stars = stars;
+        }
+
         private Hotel() { }
 
         #region PrivateMethods

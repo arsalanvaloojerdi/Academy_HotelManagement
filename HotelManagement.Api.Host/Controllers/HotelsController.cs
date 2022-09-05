@@ -24,7 +24,7 @@ namespace HotelManagement.Api.Host.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var hotels = await _hotelService.GetAllHotels();
+            var hotels = await _hotelService.GetAllHotelsAsync();
 
             return Ok(hotels);
         }
@@ -50,7 +50,23 @@ namespace HotelManagement.Api.Host.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(RegisterHotelDto dto)
         {
-            await _hotelService.RegisterHotel(dto);
+            await _hotelService.RegisterHotelAsync(dto);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Modify hotel information
+        /// </summary>
+        /// <param name="id">Hotel Id</param>
+        /// <param name="dto">Modified Info</param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, ModifyHotelDto dto)
+        {
+            dto.Id = id;
+
+            await _hotelService.ModifyHotelAsync(dto);
 
             return Ok();
         }

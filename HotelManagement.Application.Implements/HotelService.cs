@@ -19,7 +19,7 @@ namespace HotelManagement.Application.Implements
             _hotelRepository = hotelRepository;
         }
 
-        public async Task<IEnumerable<HotelDto>> GetAllHotels()
+        public async Task<IEnumerable<HotelDto>> GetAllHotelsAsync()
         {
             var hotels = await _hotelRepository.GetAllHotelsAsync();
 
@@ -37,11 +37,18 @@ namespace HotelManagement.Application.Implements
             return hotelDetailsDto;
         }
 
-        public async Task RegisterHotel(RegisterHotelDto dto)
+        public async Task RegisterHotelAsync(RegisterHotelDto dto)
         {
             var hotel = MapToHotel(dto);
 
             _hotelRepository.Add(hotel);
+        }
+
+        public async Task ModifyHotelAsync(ModifyHotelDto dto)
+        {
+            var hotel = await _hotelRepository.GetByIdAsync(dto.Id);
+
+            hotel.Modify(dto.Name, dto.Stars);
         }
 
         #region PrivateMethods
