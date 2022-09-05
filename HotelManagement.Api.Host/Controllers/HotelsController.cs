@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Application.Interfaces.Hotels;
 using HotelManagement.Application.Interfaces.Hotels.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Api.Host.Controllers
@@ -26,6 +27,19 @@ namespace HotelManagement.Api.Host.Controllers
             var hotels = await _hotelService.GetAllHotels();
 
             return Ok(hotels);
+        }
+
+        /// <summary>
+        /// Get Hotel Details
+        /// </summary>
+        /// <param name="id">Hotel Id</param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDetails(Guid id)
+        {
+            var hotel = await _hotelService.GetHotelDetailsAsync(id);
+
+            return Ok(hotel);
         }
 
         /// <summary>
