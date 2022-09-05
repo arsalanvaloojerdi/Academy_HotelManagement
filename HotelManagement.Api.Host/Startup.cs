@@ -18,6 +18,7 @@ namespace HotelManagement.Api.Host
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             Bootstrapper.Bootstrapper.WireUp(services, Configuration);
         }
 
@@ -35,7 +36,6 @@ namespace HotelManagement.Api.Host
 
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
