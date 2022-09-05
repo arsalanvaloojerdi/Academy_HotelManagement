@@ -1,9 +1,11 @@
 ﻿using HotelManagement.Application.Interfaces.Hotels;
+using HotelManagement.Application.Interfaces.Hotels.Dtos;
 using HotelManagement.Domain.Models.Models.Hotels;
 using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using HotelManagement.Application.Interfaces.Hotels.Dtos;
 
 namespace HotelManagement.Application.Implements
 {
@@ -16,6 +18,15 @@ namespace HotelManagement.Application.Implements
             _hotelRepository = hotelRepository;
         }
 
+        public async Task<IEnumerable<HotelDto>> GetAllHotels()
+        {
+            var hotels = await _hotelRepository.GetAllHotelsAsync();
+
+            var hotelsDto = hotels.Select(MapToDto);
+
+            return hotelsDto;
+        }
+
         public async Task RegisterHotel(RegisterHotelDto dto)
         {
             var hotel = MapToHotel(dto);
@@ -24,6 +35,16 @@ namespace HotelManagement.Application.Implements
         }
 
         #region PrivateMethods
+
+        private static HotelDto MapToDto(Hotel hotel)
+        {
+            return new HotelDto
+            {
+                Id = hotel.Id,
+                Name = hotel.Name,
+                Stars = hotel.Stars
+            };
+        }
 
         private static Hotel MapToHotel(RegisterHotelDto dto)
         {
