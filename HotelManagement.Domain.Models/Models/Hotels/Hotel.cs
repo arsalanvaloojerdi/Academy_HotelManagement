@@ -15,6 +15,16 @@ namespace HotelManagement.Domain.Models.Models.Hotels
             this.Stars = stars;
             this.Address = address;
         }
+        
+        public Hotel(Guid id,string name, int stars, Address address)
+        {
+            GuardAgainstInvalidHotelStar(stars);
+
+            this.Id = id;
+            this.Name = name;
+            this.Stars = stars;
+            this.Address = address;
+        }
 
         public Guid Id { get; private set; }
 
