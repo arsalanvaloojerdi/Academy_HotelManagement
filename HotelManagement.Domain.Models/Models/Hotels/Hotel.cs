@@ -1,11 +1,14 @@
 ﻿using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using System;
+using System.Collections.Generic;
 
 namespace HotelManagement.Domain.Models.Models.Hotels
 {
     public class Hotel
     {
+        private readonly List<HotelFacility> _facilities = new List<HotelFacility>();
+
         public Hotel(string name, int stars, Address address)
         {
             GuardAgainstInvalidHotelStar(stars);
@@ -23,6 +26,19 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         public int Stars { get; private set; }
 
         public Address Address { get; private set; }
+
+        public IEnumerable<HotelFacility> Facilities => _facilities.AsReadOnly();
+
+        public void Modify(string name, int stars)
+        {
+            this.Name = name;
+            this.Stars = stars;
+        }
+
+        public void AddFacility(HotelFacility facility)
+        {
+            this._facilities.Add(facility);
+        }
 
         private Hotel() { }
 

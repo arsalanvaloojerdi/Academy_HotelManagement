@@ -14,6 +14,7 @@ namespace HotelManagement.Infrastructure.Persistence.EntityConfigurations.Hotels
                 navigationBuilder.Property(p => p.City).HasMaxLength(100);
                 navigationBuilder.Property(p => p.Details).HasMaxLength(500);
             });
+            builder.HasMany(p => p.Facilities);
 
             builder.ToTable("Hotels");
         }
