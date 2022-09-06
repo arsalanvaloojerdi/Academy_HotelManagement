@@ -37,6 +37,10 @@ namespace HotelManagement.Domain.Models.Models.Hotels
 
         public void AddFacility(HotelFacility facility)
         {
+            // leaky abstraction
+            // Some business rules
+            // Example : Check uniqueness
+
             this._facilities.Add(facility);
         }
 

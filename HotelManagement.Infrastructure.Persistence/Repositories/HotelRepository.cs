@@ -31,7 +31,6 @@ namespace HotelManagement.Infrastructure.Persistence.Repositories
         public void Add(Hotel hotel)
         {
             _context.Hotels.Add(hotel);
-            _context.SaveChanges();
         }
     }
 }

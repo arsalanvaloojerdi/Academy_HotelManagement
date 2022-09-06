@@ -1,4 +1,5 @@
-﻿using HotelManagement.Application.Interfaces.Hotels;
+﻿using HotelManagement.Api.Host.SeedWorks;
+using HotelManagement.Application.Interfaces.Hotels;
 using HotelManagement.Application.Interfaces.Hotels.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace HotelManagement.Api.Host.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class HotelsController : ControllerBase
+    public class HotelsController : ApiControllerBase
     {
         private readonly IHotelService _hotelService;
 
@@ -26,7 +26,7 @@ namespace HotelManagement.Api.Host.Controllers
         {
             var hotels = await _hotelService.GetAllHotelsAsync();
 
-            return Ok(hotels);
+            return OkResult(ApiMessages.Ok, hotels);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace HotelManagement.Api.Host.Controllers
         {
             var hotel = await _hotelService.GetHotelDetailsAsync(id);
 
-            return Ok(hotel);
+            return OkResult(ApiMessages.Ok, hotel);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace HotelManagement.Api.Host.Controllers
         {
             await _hotelService.RegisterHotelAsync(dto);
 
-            return Ok();
+            return OkResult(ApiMessages.Ok);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace HotelManagement.Api.Host.Controllers
 
             await _hotelService.ModifyHotelAsync(dto);
 
-            return Ok();
+            return OkResult(ApiMessages.Ok);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace HotelManagement.Api.Host.Controllers
 
             await _hotelService.AddFacilityAsync(dto);
 
-            return Ok();
+            return OkResult(ApiMessages.Ok);
         }
     }
 }

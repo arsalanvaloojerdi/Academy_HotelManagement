@@ -5,25 +5,25 @@ VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3A6003DB-CCB5-49AB-A6D4-4EFF7EDD965A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement.Domain.Models", "HotelManagement.Domain.Models\HotelManagement.Domain.Models.csproj", "{A1497C70-CEB6-4178-A023-CC48FC62AF7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Domain.Models", "HotelManagement.Domain.Models\HotelManagement.Domain.Models.csproj", "{A1497C70-CEB6-4178-A023-CC48FC62AF7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement.Domain.Models.UnitTests", "HotelManagement.Domain.Model.UnitTests\HotelManagement.Domain.Models.UnitTests.csproj", "{99958316-EF7B-4B37-8A73-B13E3C85B0B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Domain.Models.UnitTests", "HotelManagement.Domain.Model.UnitTests\HotelManagement.Domain.Models.UnitTests.csproj", "{99958316-EF7B-4B37-8A73-B13E3C85B0B1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2EDCBE19-2E14-499C-8D66-0EE2349B0413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement.Infrastructure.Persistence", "HotelManagement.Infrastructure.Persistence\HotelManagement.Infrastructure.Persistence.csproj", "{EB0CCB23-B804-48DF-87CE-FBB092522489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Infrastructure.Persistence", "HotelManagement.Infrastructure.Persistence\HotelManagement.Infrastructure.Persistence.csproj", "{EB0CCB23-B804-48DF-87CE-FBB092522489}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{41127E9A-8BEC-4219-A97A-CD594D96EEBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement.Application.Interfaces", "HotelManagement.Application.Interfaces\HotelManagement.Application.Interfaces.csproj", "{0D740E7F-7F8A-4BC9-983E-A94BF6F66A1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Application.Interfaces", "HotelManagement.Application.Interfaces\HotelManagement.Application.Interfaces.csproj", "{0D740E7F-7F8A-4BC9-983E-A94BF6F66A1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement.Application.Implements", "HotelManagement.Application.Implements\HotelManagement.Application.Implements.csproj", "{82C7E341-470A-4C00-B62D-3E5FA5024C05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Application.Implements", "HotelManagement.Application.Implements\HotelManagement.Application.Implements.csproj", "{82C7E341-470A-4C00-B62D-3E5FA5024C05}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Host", "Host", "{0A2A94AE-3A58-4289-B15A-28139F3590B6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{0A2A94AE-3A58-4289-B15A-28139F3590B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement.Api.Host", "HotelManagement.Api.Host\HotelManagement.Api.Host.csproj", "{99B90EDD-2DDD-4D49-A0BA-774CAE42DD83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Api.Host", "HotelManagement.Api.Host\HotelManagement.Api.Host.csproj", "{99B90EDD-2DDD-4D49-A0BA-774CAE42DD83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagement.Bootstrapper", "HotelManagement.Bootstrapper\HotelManagement.Bootstrapper.csproj", "{86BE541D-54B9-4203-B939-FAF5BDBFCC39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagement.Bootstrapper", "HotelManagement.Bootstrapper\HotelManagement.Bootstrapper.csproj", "{86BE541D-54B9-4203-B939-FAF5BDBFCC39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,6 +3,7 @@ using HotelManagement.Application.Interfaces.Hotels.Dtos;
 using HotelManagement.Domain.Models.Models.Hotels;
 using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Interfaces;
+using HotelManagement.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace HotelManagement.Application.Implements
     public class HotelService : IHotelService
     {
         private readonly IHotelRepository _hotelRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HotelService(IHotelRepository hotelRepository)
+        public HotelService(IHotelRepository hotelRepository, IUnitOfWork unitOfWork)
         {
             _hotelRepository = hotelRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IEnumerable<HotelDto>> GetAllHotelsAsync()
@@ -42,6 +45,8 @@ namespace HotelManagement.Application.Implements
             var hotel = MapToHotel(dto);
 
             _hotelRepository.Add(hotel);
+
+            await _unitOfWork.Commit();
         }
 
         public async Task ModifyHotelAsync(ModifyHotelDto dto)
@@ -49,6 +54,8 @@ namespace HotelManagement.Application.Implements
             var hotel = await _hotelRepository.GetByIdAsync(dto.Id);
 
             hotel.Modify(dto.Name, dto.Stars);
+
+            await _unitOfWork.Commit();
         }
 
         public async Task AddFacilityAsync(AddFacilityDto dto)
@@ -57,6 +64,8 @@ namespace HotelManagement.Application.Implements
             var facility = new HotelFacility(dto.Name, dto.Description);
 
             hotel.AddFacility(facility);
+
+            await _unitOfWork.Commit();
         }
 
         #region PrivateMethods
