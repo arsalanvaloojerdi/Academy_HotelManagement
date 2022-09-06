@@ -4,6 +4,7 @@ using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Interfaces;
 using System.Threading.Tasks;
 using HotelManagement.Application.Interfaces.Hotels.Dtos;
+using System;
 
 namespace HotelManagement.Application.Implements
 {
@@ -22,6 +23,13 @@ namespace HotelManagement.Application.Implements
 
             _hotelRepository.Add(hotel);
         }
+        
+        public async Task ModifyHotel(Guid id,ModifyHotelDto dto)
+        {
+            var hotel = MapToHotel(id, dto);
+
+            _hotelRepository.Update(hotel);
+        }
 
         #region PrivateMethods
 
@@ -31,6 +39,14 @@ namespace HotelManagement.Application.Implements
             var hotel = new Hotel(dto.Name, dto.Stars, address);
             return hotel;
         }
+
+        private static Hotel MapToHotel(Guid id,ModifyHotelDto dto)
+        {
+            var address = new Address(dto.City, dto.AddressDetails);
+            var hotel = new Hotel(id,dto.Name, dto.Stars, address);
+            return hotel;
+        }
+
 
         #endregion
     }

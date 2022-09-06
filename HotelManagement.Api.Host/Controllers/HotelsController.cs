@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Application.Interfaces.Hotels;
 using HotelManagement.Application.Interfaces.Hotels.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Api.Host.Controllers
@@ -20,6 +21,14 @@ namespace HotelManagement.Api.Host.Controllers
         public async Task<IActionResult> Post(RegisterHotelDto dto)
         {
             await _hotelService.RegisterHotel(dto);
+
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute]Guid id,[FromBody]ModifyHotelDto dto)
+        {
+            await _hotelService.ModifyHotel(id,dto);
 
             return Ok();
         }
