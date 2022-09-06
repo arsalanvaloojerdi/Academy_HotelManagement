@@ -9,6 +9,7 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         public Hotel(string name, int stars, Address address)
         {
             GuardAgainstInvalidHotelStar(stars);
+            GuardIfInvalidHotelCity(address);
 
             this.Id = Guid.NewGuid();
             this.Name = name;
@@ -37,5 +38,12 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         }
 
         #endregion
+        private void GuardIfInvalidHotelCity(Address address)
+        {
+            const string invalidCity = "Tehran";
+            if (address.City == invalidCity)
+                throw new TheInvalidHotelCityException();
+        }
+
     }
 }

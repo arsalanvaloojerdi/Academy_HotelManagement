@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using HotelManagement.Domain.Models.Models.Hotels;
+using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using HotelManagement.Domain.Models.UnitTests.Constants;
 using System;
@@ -33,6 +34,21 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
             Func<Hotel> hotel = () => CreateHotelWithStars(stars);
 
             hotel.Should().Throw<InvalidHotelStarException>();
+        }
+
+        [Fact]
+        public void Hotel_City_Must_Not_Be_Tehran()
+        {
+            Func<Hotel> hotel = () => CreateHotel();
+
+            hotel.Should().Throw<TheInvalidHotelCityException>();
+
+        }
+        private static Hotel CreateHotel()
+        {
+            var address = new Address("Tehran", "Fereshte");
+            var hotel = new Hotel("Negar", 5, address);
+            return hotel;
         }
 
         #region PrivateMethods
