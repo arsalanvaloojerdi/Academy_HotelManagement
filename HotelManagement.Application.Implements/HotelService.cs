@@ -51,6 +51,14 @@ namespace HotelManagement.Application.Implements
             hotel.Modify(dto.Name, dto.Stars);
         }
 
+        public async Task AddFacilityAsync(AddFacilityDto dto)
+        {
+            var hotel = await _hotelRepository.GetByIdAsync(dto.HotelId);
+            var facility = new HotelFacility(dto.Name, dto.Description);
+
+            hotel.AddFacility(facility);
+        }
+
         #region PrivateMethods
 
         private static HotelDto MapToDto(Hotel hotel)

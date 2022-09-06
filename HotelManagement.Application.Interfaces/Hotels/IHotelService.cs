@@ -14,5 +14,7 @@ namespace HotelManagement.Application.Interfaces.Hotels
         Task RegisterHotelAsync(RegisterHotelDto dto);
 
         Task ModifyHotelAsync(ModifyHotelDto dto);
+
+        Task AddFacilityAsync(AddFacilityDto dto);
     }
 }

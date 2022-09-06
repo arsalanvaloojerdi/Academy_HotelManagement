@@ -70,5 +70,21 @@ namespace HotelManagement.Api.Host.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// Add facility for a hotel
+        /// </summary>
+        /// <param name="id">Hotel Id</param>
+        /// <param name="dto">Facility Info</param>
+        /// <returns></returns>
+        [HttpPost("{id}/facilities")]
+        public async Task<IActionResult> AddFacility(Guid id, AddFacilityDto dto)
+        {
+            dto.HotelId = id;
+
+            await _hotelService.AddFacilityAsync(dto);
+
+            return Ok();
+        }
     }
 }
