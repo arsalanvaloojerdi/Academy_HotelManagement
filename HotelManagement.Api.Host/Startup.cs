@@ -1,3 +1,4 @@
+using HotelManagement.Api.Host.SeedWorks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,7 @@ namespace HotelManagement.Api.Host
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseApiExceptionHandler();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>

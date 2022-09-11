@@ -18,6 +18,7 @@ namespace HotelManagement.Bootstrapper
 
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<IUnitOfWork, EFUnitOfWork>();
         }
     }
 }
