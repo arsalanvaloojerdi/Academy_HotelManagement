@@ -2,6 +2,7 @@
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace HotelManagement.Domain.Models.Models.Hotels
 {
@@ -17,6 +18,8 @@ namespace HotelManagement.Domain.Models.Models.Hotels
             this.Name = name;
             this.Stars = stars;
             this.Address = address;
+
+            Images = new List<Image>();
         }
 
         public Guid Id { get; private set; }
@@ -28,6 +31,8 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         public Address Address { get; private set; }
 
         public IEnumerable<HotelFacility> Facilities => _facilities.AsReadOnly();
+
+        public List<Image> Images { get; private set; }
 
         public void Modify(string name, int stars)
         {
@@ -44,6 +49,14 @@ namespace HotelManagement.Domain.Models.Models.Hotels
             this._facilities.Add(facility);
         }
 
+        public void AddImage(Image image)
+        {
+            if (!IsValidToAddImage())
+                throw new MaximumImagesCountException();
+
+            Images.Add(image);
+        }
+
         private Hotel() { }
 
         #region PrivateMethods
@@ -54,6 +67,13 @@ namespace HotelManagement.Domain.Models.Models.Hotels
 
             if (stars < minimumValidStars)
                 throw new InvalidHotelStarException();
+        }
+
+        private bool IsValidToAddImage()
+        {
+            const int maxCountOfImages = 5;
+
+            return Images.Count < maxCountOfImages;
         }
 
         #endregion

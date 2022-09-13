@@ -17,7 +17,9 @@ namespace HotelManagement.Bootstrapper
                 options.UseSqlServer(configuration.GetConnectionString("SqlConnection")));
 
             services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<IHotelFacilityRepository, HotelFacilityRepository>();
             services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<IHotelFacilityService, HotelFacilityService>();
             services.AddScoped<IUnitOfWork, EFUnitOfWork>();
         }
     }
