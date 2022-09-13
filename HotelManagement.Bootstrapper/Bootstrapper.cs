@@ -1,5 +1,6 @@
 ﻿using HotelManagement.Application.Implements;
 using HotelManagement.Application.Interfaces.Hotels;
+using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Interfaces;
 using HotelManagement.Infrastructure.Persistence;
 using HotelManagement.Infrastructure.Persistence.Repositories;
@@ -19,6 +20,7 @@ namespace HotelManagement.Bootstrapper
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddScoped<IHotelService, HotelService>();
             services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+            services.AddScoped<IHotelFacilityService, HotelFacilityService>();
         }
     }
 }

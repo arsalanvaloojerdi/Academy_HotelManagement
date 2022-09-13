@@ -8,7 +8,7 @@ namespace HotelManagement.Application.Interfaces.Hotels
     public interface IHotelService
     {
         Task<IEnumerable<HotelDto>> GetAllHotelsAsync();
-
+        
         Task<HotelDetailsDto> GetHotelDetailsAsync(Guid id);
 
         Task RegisterHotelAsync(RegisterHotelDto dto);
@@ -16,5 +16,9 @@ namespace HotelManagement.Application.Interfaces.Hotels
         Task ModifyHotelAsync(ModifyHotelDto dto);
 
         Task AddFacilityAsync(AddFacilityDto dto);
+
+        Task AddHotelImageAsync(AddImageDto dto);
+        Task ShowHotelImageAsync(ShowImageDto dto);
+
     }
 }

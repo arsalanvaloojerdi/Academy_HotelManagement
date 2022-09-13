@@ -11,6 +11,7 @@ namespace HotelManagement.Api.Host.Controllers
     public class HotelsController : ApiControllerBase
     {
         private readonly IHotelService _hotelService;
+        private readonly IHotelFacilityService _hotelFacilityService;
 
         public HotelsController(IHotelService hotelService)
         {
@@ -85,6 +86,52 @@ namespace HotelManagement.Api.Host.Controllers
             await _hotelService.AddFacilityAsync(dto);
 
             return OkResult(ApiMessages.Ok);
+        }
+
+        [HttpDelete("{id}/facilities/facilityId")]
+        public async Task<IActionResult> DeleteFacility(Guid id, DeleteFacilityDto dto)
+        {
+            dto.Id = id;
+
+            await _hotelFacilityService.DeleteFacilityAsync(dto);
+
+            return OkResult(ApiMessages.Ok);
+        }
+
+        [HttpPut("{id}/facilities/facilityId")]
+        public async Task<IActionResult> ModifyFacility(Guid id, ModifyHotelFacilityDto dto)
+        {
+            dto.Id = id;      
+            
+            await _hotelFacilityService.ModifyHotelFacilityAsync(dto);
+
+            return OkResult(ApiMessages.Ok);
+        }
+        
+        [HttpGet("{id}/facilities/facilityId")]
+        public async Task<IActionResult> GetAllHotelFacility()
+        {
+            var hotels = await _hotelFacilityService.GetAllHotelFacilityAsync();
+
+            return OkResult(ApiMessages.Ok, hotels);
+        }
+
+        [HttpPost("{id}/hotel/hotelId")]
+        public async Task<IActionResult> AddHotelImage(Guid id, AddImageDto dto)
+        {
+            dto.HotelId = id;
+            
+            await _hotelService.AddHotelImageAsync(dto);
+
+            return OkResult(ApiMessages.Ok);
+        }
+
+        [HttpGet ("{id}/hotel/hotelId")]
+        public async Task<IActionResult> ShowHotelImage( ShowImageDto dto)
+        {
+            await _hotelService.ShowHotelImageAsync(dto);
+            
+            return  OkResult(ApiMessages.Ok);
         }
     }
 }
