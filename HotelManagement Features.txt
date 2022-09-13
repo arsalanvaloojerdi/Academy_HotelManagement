@@ -1,0 +1,61 @@
+Scenario 1:
+(be able to see hotel facilities)
+	Given 'Ali' is a platform manager
+	When he attempts to see a hotel facilities with following info
+	| HotelId |
+	|    1    |
+	Then he should see the following result
+	| HotelId | Id | Name  | Description         |
+	|    1    | 1  | pool  | hot tub             |
+	|    1    | 2  | party | parties are allowed |
+
+
+Scenario 2:
+(be able to modify hotel facility)
+	Given 'Ali' is a platform manager
+	When he attempts to modify a hotel facility from
+	| HotelId | Id | Name | Description |
+	|    1    | 2  | pool | hot tub     |
+	to
+	| HotelId | Id | Name | Description |
+	|    1    | 2  | pool | cooling tub |
+	Then the hotel facility should be modified successfully
+
+
+Scenario 3:
+(be able to remove hotel facility)
+	Given 'Ali' is a platform manager
+	When he attempts to remove a hotel facility with following info
+	| HotelId | Id | Name | Description |
+	|    1    | 2  | pool | hot tub     |
+	Then he should be informed that the hotel facility removed successfully
+
+Scenario 4:
+(be able to add image to a hotel)
+	Given 'Ali' is a platform manager
+	When he attempts to add an image to a hotel
+	Then he should be informed that the image was added successfully
+
+
+Scenario 5:
+(be able to see hotel images)
+	Given 'Ali' is a platform manager
+	When he attempts to see a hotel images with following info
+	| HotelId |
+	|    1    |
+	Then he should see all the images for the hotel with id 1
+
+
+Scenario 6:
+(Each hotel can have up to 5 images)
+	Given 'Ali' is a platform manager
+	When he attempts to add the sixth image to a hotel
+	Then he should be informed that hotel images are more than maximum
+
+
+
+
+
+
+
+
