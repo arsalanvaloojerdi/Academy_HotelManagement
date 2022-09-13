@@ -2,12 +2,14 @@
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HotelManagement.Domain.Models.Models.Hotels
 {
     public class Hotel
     {
         private readonly List<HotelFacility> _facilities = new List<HotelFacility>();
+        private readonly List<HotelPicture> _hotelsPictures = new List<HotelPicture>();
 
         public Hotel(string name, int stars, Address address)
         {
@@ -28,11 +30,24 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         public Address Address { get; private set; }
 
         public IEnumerable<HotelFacility> Facilities => _facilities.AsReadOnly();
+        public IEnumerable<HotelPicture> Pictures => _hotelsPictures.AsReadOnly();
 
         public void Modify(string name, int stars)
         {
             this.Name = name;
             this.Stars = stars;
+        }
+
+        public void ModifyFacility(HotelFacility hotelFacility)
+        {
+            var facility = GetFacilityById(hotelFacility.Id);
+            facility.Modify(hotelFacility.Name, hotelFacility.Description);
+        }
+
+        public void DeleteFacility(Guid id)
+        {
+            var facility = GetFacilityById(Id);
+            facility.Delete();
         }
 
         public void AddFacility(HotelFacility facility)
@@ -43,7 +58,16 @@ namespace HotelManagement.Domain.Models.Models.Hotels
 
             this._facilities.Add(facility);
         }
+        public void AddPictures(HotelPicture hotelsPictures)
+        {
+            GuardAgainstInvalidCountPictures((sbyte)_hotelsPictures.Count);
 
+            this._hotelsPictures.Add(hotelsPictures);
+        }
+        public HotelFacility GetFacilityById(Guid id)
+        {
+            return this.Facilities.SingleOrDefault(a => a.Id == id);
+        }
         private Hotel() { }
 
         #region PrivateMethods
@@ -54,6 +78,11 @@ namespace HotelManagement.Domain.Models.Models.Hotels
 
             if (stars < minimumValidStars)
                 throw new InvalidHotelStarException();
+        }
+
+        private static void GuardAgainstInvalidCountPictures(sbyte count)
+        {
+            InvalidCountPicturesException.ThrowIfInvalidCount(count);
         }
 
         #endregion
