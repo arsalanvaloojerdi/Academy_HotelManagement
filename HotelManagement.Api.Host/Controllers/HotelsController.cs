@@ -124,12 +124,14 @@ namespace HotelManagement.Api.Host.Controllers
         /// update facility for a hotel
         /// </summary>
         /// <param name="id">Hotel Id</param>
+        /// <param name="facilityId">facility Id</param>
         /// <param name="dto">Facility Info</param>
         /// <returns></returns>
-        [HttpPut("{id}/facilities")]
-        public async Task<IActionResult> UpdateFacility(Guid id, ModifyFacilityDto dto)
+        [HttpPut("{id}/facilities/{facilityId}")]
+        public async Task<IActionResult> UpdateFacility(Guid id,Guid facilityId, ModifyFacilityDto dto)
         {
             dto.HotelId = dto.HotelId;
+            dto.Id= facilityId;
 
             await _hotelService.ModifyFacilityAsync(dto);
 
