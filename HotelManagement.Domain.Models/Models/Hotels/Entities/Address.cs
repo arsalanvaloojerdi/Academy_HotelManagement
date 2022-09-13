@@ -1,6 +1,6 @@
 ﻿namespace HotelManagement.Domain.Models.Models.Hotels.Entities
 {
-    public class Address
+    public  class Address
     {
         public Address(string city, string details)
         {

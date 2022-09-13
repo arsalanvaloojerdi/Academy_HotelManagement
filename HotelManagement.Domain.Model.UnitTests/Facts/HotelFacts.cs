@@ -4,6 +4,7 @@ using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using HotelManagement.Domain.Models.UnitTests.Constants;
 using System;
+using System.Net.Mime;
 using Xunit;
 
 namespace HotelManagement.Domain.Models.UnitTests.Facts
@@ -17,7 +18,7 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
             // Green
             // Refactor
 
-            var hotel = new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address);
+            var hotel = new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address , new Image("Dariush.jpg",@"D:\Pictures"));
 
             hotel.Name.Should().Be(DariushHotel.Name);
             hotel.Stars.Should().Be(DariushHotel.Stars);
@@ -46,17 +47,25 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
 
             hotel.Facilities.Should().HaveCount(1).And.Contain(facility);
         }
+        
+        private static Image CreateSomeImage()
+        {
+            return new Image("9.jpg", @"D:\Source");
+        }
 
         #region PrivateMethods
 
         private static Hotel CreateHotelWithStars(int stars)
         {
-            return new Hotel(DariushHotel.Name, stars, DariushHotel.Address);
+            return new Hotel(DariushHotel.Name, stars, DariushHotel.Address , new Image("Dariush.jpg",@"D:\Pictures"));
         }
-
+        private static Hotel CreateHotelWithImage(Image image)
+        {
+            return new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address, image);
+        }
         private static Hotel CreateSomeHotel()
         {
-            return new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address);
+            return new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address , new Image("Dariush.jpg",@"D:\Pictures"));
         }
 
         #endregion
