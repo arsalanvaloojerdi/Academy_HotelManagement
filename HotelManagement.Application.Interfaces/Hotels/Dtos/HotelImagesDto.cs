@@ -1,6 +1,6 @@
-﻿using System;
+﻿using HotelManagement.Domain.Models.Models.Hotels.Entities;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace HotelManagement.Application.Interfaces.Hotels.Dtos
 {

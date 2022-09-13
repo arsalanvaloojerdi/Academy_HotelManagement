@@ -18,6 +18,8 @@ namespace HotelManagement.Domain.Models.Models.Hotels
             this.Name = name;
             this.Stars = stars;
             this.Address = address;
+
+            Images = new List<Image>();
         }
 
         public Guid Id { get; private set; }
@@ -71,7 +73,7 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         {
             const int maxCountOfImages = 5;
 
-            return Images.Count <= maxCountOfImages;
+            return Images.Count < maxCountOfImages;
         }
 
         #endregion

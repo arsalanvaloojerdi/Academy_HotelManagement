@@ -4,7 +4,6 @@ using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using HotelManagement.Domain.Models.UnitTests.Constants;
 using System;
-using System.Drawing;
 using Xunit;
 
 namespace HotelManagement.Domain.Models.UnitTests.Facts
@@ -41,7 +40,7 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
         public void Should_be_add_facility_for_a_hotel()
         {
             var hotel = CreateSomeHotel();
-            var facility = new HotelFacility(Facilities.SwimmingFacility, Facilities.SwimmingFacilityDescription, new Guid());
+            var facility = new HotelFacility(SwimmingFacility.SwimmingFacilityName, SwimmingFacility.SwimmingFacilityDescription, new Guid());
 
             hotel.AddFacility(facility);
 
@@ -51,7 +50,7 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
         [Fact]
         public void Should_add_image_for_a_hotel_correctly()
         {
-            var image = GetSomeImage();
+            var image = CreateSomeImage();
             var hotel = CreateSomeHotel();
 
             hotel.AddImage(image);
@@ -59,18 +58,18 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
             hotel.Images.Should().HaveCount(1).And.Contain(image);
         }
 
-        //[Fact]
-        //public void Should_throw_MaximumImagesCountException_when_try_to_add_the_sixth_image()
-        //{
-        //    var image = GetSomeImage();
-        //    var hotel = CreateSomeHotel();
+        [Fact]
+        public void Should_throw_MaximumImagesCountException_when_try_to_add_the_sixth_image()
+        {
+            var image = CreateSomeImage();
+            var hotel = CreateSomeHotel();
 
-        //    for (int i = 0; i < 5; i++)
-        //        hotel.AddImage(image);
-        //    var addImage = () => hotel.AddImage(image);
+            for (int i = 0; i < 5; i++)
+                hotel.AddImage(image);
+            Action addImage = () => hotel.AddImage(image);
 
-        //    addImage.Should().Throw<MaximumImagesCountException>();
-        //}
+            addImage.Should().Throw<MaximumImagesCountException>();
+        }
 
 
         #region PrivateMethods
@@ -85,9 +84,9 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
             return new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address);
         }
 
-        private static Image GetSomeImage()
+        private static Image CreateSomeImage()
         {
-            return Image.FromFile("SampImag.jpg");
+            return new Image(DariushHotelImage.Name, DariushHotelImage.Address);
         }
 
         #endregion

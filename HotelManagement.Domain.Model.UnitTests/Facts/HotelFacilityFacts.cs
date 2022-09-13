@@ -13,10 +13,10 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
         {
             var hotelFacility = GetSomeHotelFacility();
 
-            hotelFacility.Modify(Facilities.PartyFacility, Facilities.PartyFacilityDescription);
+            hotelFacility.Modify(PartyFacility.PartyFacilityName, PartyFacility.PartyFacilityDescription);
 
-            hotelFacility.Name.Should().Be(Facilities.PartyFacility);
-            hotelFacility.Description.Should().Be(Facilities.PartyFacilityDescription);
+            hotelFacility.Name.Should().Be(PartyFacility.PartyFacilityName);
+            hotelFacility.Description.Should().Be(PartyFacility.PartyFacilityDescription);
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
 
         private static HotelFacility GetSomeHotelFacility()
         {
-            return new HotelFacility(Facilities.SwimmingFacility, Facilities.SwimmingFacilityDescription, new Guid());
+            return new HotelFacility(SwimmingFacility.SwimmingFacilityName, SwimmingFacility.SwimmingFacilityDescription, new Guid());
         }
 
         #endregion

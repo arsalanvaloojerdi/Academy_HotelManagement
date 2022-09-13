@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using HotelManagement.Domain.Models.Models.Hotels.Entities;
 
 namespace HotelManagement.Application.Interfaces.Hotels.Dtos
 {
