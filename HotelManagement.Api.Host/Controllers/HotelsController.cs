@@ -74,7 +74,7 @@ namespace HotelManagement.Api.Host.Controllers
         [HttpGet("{id}/pictures")]
         public async Task<IActionResult> GetHotelPictures(Guid id)
         {
-            return Ok(await _hotelService.GetHotelFacilitiesAsync(id));
+            return Ok(await _hotelService.GetHotelPicturesAsync(id));
         }
 
         /// <summary>
