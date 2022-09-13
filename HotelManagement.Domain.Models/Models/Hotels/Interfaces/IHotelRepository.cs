@@ -11,5 +11,7 @@ namespace HotelManagement.Domain.Models.Models.Hotels.Interfaces
         Task<Hotel> GetByIdAsync(Guid id);
 
         void Add(Hotel hotel);
+        Task<Hotel> GetHotelWithFacilitiesByIdAsync(Guid id);
+        Task<Hotel> GetHotelWithPicturesByIdAsync(Guid id);
     }
 }

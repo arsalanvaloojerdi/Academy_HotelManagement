@@ -47,6 +47,30 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
             hotel.Facilities.Should().HaveCount(1).And.Contain(facility);
         }
 
+        [Fact]
+        public void should_be_add_picture_for_a_hotel()
+        {
+            var hotel = CreateSomeHotel();
+            var picture = new HotelPicture(Pictures.LobbyPictureName, Pictures.LobbyPictureFileUrl);
+
+            hotel.AddPictures(picture);
+
+            hotel.Pictures.Should().HaveCount(1).And.Contain(picture);
+        }
+
+        [Fact]
+        public void Picture_Count_must_be_less_than_5()
+        {
+            var hotel= CreateSomeHotel();
+
+            for (int i = 0; i < 5; i++)
+                hotel.AddPictures(CreateSomePicture());
+
+            Action hotelPicture = () => hotel.AddPictures(CreateSomePicture());
+
+            hotelPicture.Should().Throw<InvalidCountPicturesException>();
+        }
+
         #region PrivateMethods
 
         private static Hotel CreateHotelWithStars(int stars)
@@ -58,7 +82,11 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
         {
             return new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address);
         }
-
+        private static HotelPicture CreateSomePicture()
+        {
+            return new HotelPicture(Pictures.LobbyPictureName, Pictures.LobbyPictureFileUrl);
+        }
+         
         #endregion
     }
 }

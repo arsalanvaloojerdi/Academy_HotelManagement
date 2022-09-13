@@ -28,6 +28,19 @@ namespace HotelManagement.Infrastructure.Persistence.Repositories
                 .FindAsync(id);
         }
 
+        public async Task<Hotel> GetHotelWithFacilitiesByIdAsync(Guid id)
+        {
+            return await _context.Hotels
+                .Include(h => h.Facilities)
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<Hotel> GetHotelWithPicturesByIdAsync(Guid id)
+        {
+            return await _context.Hotels
+                .Include(h => h.Pictures)
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
         public void Add(Hotel hotel)
         {
             _context.Hotels.Add(hotel);
