@@ -4,6 +4,7 @@ using HotelManagement.Domain.Models.Models.Hotels.Entities;
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using HotelManagement.Domain.Models.UnitTests.Constants;
 using System;
+using System.Drawing;
 using Xunit;
 
 namespace HotelManagement.Domain.Models.UnitTests.Facts
@@ -37,15 +38,40 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
         }
 
         [Fact]
-        public void should_be_add_facility_for_a_hotel()
+        public void Should_be_add_facility_for_a_hotel()
         {
             var hotel = CreateSomeHotel();
-            var facility = new HotelFacility(Facilities.SwimmingFacility, Facilities.SwimmingFacilityDescription);
+            var facility = new HotelFacility(Facilities.SwimmingFacility, Facilities.SwimmingFacilityDescription, new Guid());
 
             hotel.AddFacility(facility);
 
             hotel.Facilities.Should().HaveCount(1).And.Contain(facility);
         }
+
+        [Fact]
+        public void Should_add_image_for_a_hotel_correctly()
+        {
+            var image = GetSomeImage();
+            var hotel = CreateSomeHotel();
+
+            hotel.AddImage(image);
+
+            hotel.Images.Should().HaveCount(1).And.Contain(image);
+        }
+
+        //[Fact]
+        //public void Should_throw_MaximumImagesCountException_when_try_to_add_the_sixth_image()
+        //{
+        //    var image = GetSomeImage();
+        //    var hotel = CreateSomeHotel();
+
+        //    for (int i = 0; i < 5; i++)
+        //        hotel.AddImage(image);
+        //    var addImage = () => hotel.AddImage(image);
+
+        //    addImage.Should().Throw<MaximumImagesCountException>();
+        //}
+
 
         #region PrivateMethods
 
@@ -57,6 +83,11 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
         private static Hotel CreateSomeHotel()
         {
             return new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address);
+        }
+
+        private static Image GetSomeImage()
+        {
+            return Image.FromFile("SampImag.jpg");
         }
 
         #endregion

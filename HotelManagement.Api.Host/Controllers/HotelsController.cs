@@ -86,5 +86,24 @@ namespace HotelManagement.Api.Host.Controllers
 
             return OkResult(ApiMessages.Ok);
         }
+
+        [HttpGet("{id}/images")]
+        public async Task<IActionResult> Images(Guid id)
+        {
+            var hotelImages = await _hotelService.GetImagesAsync(id);
+
+            return OkResult(ApiMessages.Ok, hotelImages);
+        }
+
+
+        [HttpPost("{id}/images")]
+        public async Task<IActionResult> AddImage(Guid id, AddHotelImageDto dto)
+        {
+            dto.HotelId = id;
+
+            await _hotelService.AddImageAsync(dto);
+
+            return OkResult(ApiMessages.Ok);
+        }
     }
 }

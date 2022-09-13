@@ -6,6 +6,7 @@ using HotelManagement.Domain.Models.Models.Hotels.Interfaces;
 using HotelManagement.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,11 +62,29 @@ namespace HotelManagement.Application.Implements
         public async Task AddFacilityAsync(AddFacilityDto dto)
         {
             var hotel = await _hotelRepository.GetByIdAsync(dto.HotelId);
-            var facility = new HotelFacility(dto.Name, dto.Description);
+            var facility = new HotelFacility(dto.Name, dto.Description, dto.HotelId);
 
             hotel.AddFacility(facility);
 
             await _unitOfWork.Commit();
+        }
+
+        public async Task AddImageAsync(AddHotelImageDto dto)
+        {
+            var hotel = await _hotelRepository.GetByIdAsync(dto.HotelId);
+
+            hotel.AddImage(dto.Image);
+
+            await _unitOfWork.Commit();
+        }
+
+        public async Task<HotelImagesDto> GetImagesAsync(Guid id)
+        {
+            var hotel = await _hotelRepository.GetByIdAsync(id);
+
+            var hotelImagesDto = MapToImagesDto(hotel);
+
+            return hotelImagesDto;
         }
 
         #region PrivateMethods
@@ -89,6 +108,15 @@ namespace HotelManagement.Application.Implements
                 Stars = hotel.Stars,
                 City = hotel.Address.City,
                 Address = hotel.Address.Details
+            };
+        }
+
+        private static HotelImagesDto MapToImagesDto(Hotel hotel)
+        {
+            return new HotelImagesDto
+            {
+                Id = hotel.Id,
+                Image = hotel.Images
             };
         }
 

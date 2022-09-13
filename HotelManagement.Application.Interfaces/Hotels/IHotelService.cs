@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Application.Interfaces.Hotels.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Application.Interfaces.Hotels
@@ -16,5 +17,9 @@ namespace HotelManagement.Application.Interfaces.Hotels
         Task ModifyHotelAsync(ModifyHotelDto dto);
 
         Task AddFacilityAsync(AddFacilityDto dto);
+
+        Task<HotelImagesDto> GetImagesAsync(Guid id);
+
+        Task AddImageAsync(AddHotelImageDto dto);
     }
 }
