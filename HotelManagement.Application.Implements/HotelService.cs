@@ -108,17 +108,7 @@ namespace HotelManagement.Application.Implements
                 Address = hotel.Address.Details
             };
         }
-
-        private static ShowImageDto ShowImageDto(Image image)
-        {
-            return new ShowImageDto
-            {
-               
-                    
-                
-            };
-        }
-
+        
         private static Hotel MapToHotel(RegisterHotelDto dto)
         {
             var address = new Address(dto.City, dto.AddressDetails);
