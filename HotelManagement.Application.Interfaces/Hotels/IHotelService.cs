@@ -15,10 +15,9 @@ namespace HotelManagement.Application.Interfaces.Hotels
 
         Task ModifyHotelAsync(ModifyHotelDto dto);
 
-        Task AddFacilityAsync(AddFacilityDto dto);
-
         Task AddHotelImageAsync(AddImageDto dto);
-        Task ShowHotelImageAsync(ShowImageDto dto);
+        
+        Task<ShowHotelImagesDto> ShowHotelImageAsync(Guid hotelId);
 
     }
 }

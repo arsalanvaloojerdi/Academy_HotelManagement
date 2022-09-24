@@ -5,12 +5,12 @@ namespace HotelManagement.Domain.Models.Models.Hotels.Entities
 {
     public class Image
     {
-        public Image(string name, string address)
+        public Image(string name, string url)
         {
             Name = name;
-            Address = address;
+            Url = url;
         }
         public string Name { get;  private set; }
-        public string Address { get; private set; }
+        public string Url { get; private set; }
     }
 }

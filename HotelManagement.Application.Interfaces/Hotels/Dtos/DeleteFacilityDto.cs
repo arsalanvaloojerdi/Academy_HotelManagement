@@ -7,5 +7,6 @@ namespace HotelManagement.Application.Interfaces.Hotels.Dtos
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public Guid HotelId { get; set; }
     }
 }

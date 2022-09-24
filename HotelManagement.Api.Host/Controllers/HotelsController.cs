@@ -83,7 +83,7 @@ namespace HotelManagement.Api.Host.Controllers
         {
             dto.HotelId = id;
 
-            await _hotelService.AddFacilityAsync(dto);
+            await _hotelFacilityService.AddFacilityAsync(dto);
 
             return OkResult(ApiMessages.Ok);
         }
@@ -108,10 +108,10 @@ namespace HotelManagement.Api.Host.Controllers
             return OkResult(ApiMessages.Ok);
         }
         
-        [HttpGet("{id}/facilities/{facilityId}")]
-        public async Task<IActionResult> GetAllHotelFacility()
+        [HttpGet("{id}/facilities")]
+        public async Task<IActionResult> GetHotelFacilities(Guid id)
         {
-            var hotels = await _hotelFacilityService.GetAllHotelFacilityAsync();
+            var hotels = await _hotelFacilityService.GetAllHotelFacilitiesAsync(id);
 
             return OkResult(ApiMessages.Ok, hotels);
         }
@@ -127,9 +127,9 @@ namespace HotelManagement.Api.Host.Controllers
         }
 
         [HttpGet ("{id}")]
-        public async Task<IActionResult> ShowHotelImage( ShowImageDto dto)
+        public async Task<IActionResult> GetHotelImage(Guid id)
         {
-            await _hotelService.ShowHotelImageAsync(dto);
+            await _hotelService.ShowHotelImageAsync(id);
             
             return  OkResult(ApiMessages.Ok);
         }

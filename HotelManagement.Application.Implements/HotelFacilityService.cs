@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,30 +24,39 @@ namespace HotelManagement.Application.Implements
 
         public async Task DeleteFacilityAsync(DeleteFacilityDto dto)
         {
-            var hotel = await _hotelRepository.GetByIdAsync(dto.Id);
-            var facility = new HotelFacility(dto.Name, dto.Description);
+            var hotel = await _hotelRepository.GetByIdAsync(dto.HotelId);
 
-            hotel.DeleteFacility(facility);
+            hotel.DeleteFacility(dto.Id);
 
             await _unitOfWork.Commit();
         }
         
         public async Task ModifyHotelFacilityAsync(ModifyHotelFacilityDto dto)
         {
-            var hotel = await _hotelRepository.GetByIdAsync(dto.Id);
+            var hotel = await _hotelRepository.GetByIdAsync(dto.HotelId);
 
-            hotel.ModifyFacility(dto.Name, dto.description);
+            hotel.ModifyFacility(dto.Id,dto.Name, dto.description);
 
             await _unitOfWork.Commit();
         }
 
-        public async Task<IEnumerable<HotelDto>> GetAllHotelFacilityAsync()
+        public async Task<IEnumerable<HotelDto>> GetAllHotelFacilitiesAsync(Guid id)
         {
             var hotels = await _hotelRepository.GetAllHotelsAsync();
 
             var hotelsDto = hotels.Select(MapToDto);
 
             return hotelsDto;
+        }
+
+        public async Task AddFacilityAsync(AddFacilityDto dto)
+        {
+            var hotel = await _hotelRepository.GetByIdAsync(dto.HotelId);
+            var facility = new HotelFacility(dto.Name, dto.Description);
+
+            hotel.AddFacility(facility);
+
+            await _unitOfWork.Commit();
         }
         
         private static HotelDto MapToDto(Hotel hotel)

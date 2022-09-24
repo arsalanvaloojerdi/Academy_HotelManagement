@@ -2,16 +2,16 @@
 using HotelManagement.Domain.Models.Models.Hotels.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Net.Mail;
-using System.Net.Mime;
+using System.Linq;
 
 namespace HotelManagement.Domain.Models.Models.Hotels
 {
     public class Hotel
     {
         private readonly List<HotelFacility> _facilities = new List<HotelFacility>();
+        private readonly List<Image> _images = new List<Image>() ;
 
-        public Hotel(string name, int stars, Address address, Image image)
+        public Hotel(string name, int stars, Address address)
         {
             GuardAgainstInvalidHotelStar(stars);
             GuardIfInvalidHotelCity(address);
@@ -20,26 +20,17 @@ namespace HotelManagement.Domain.Models.Models.Hotels
             this.Name = name;
             this.Stars = stars;
             this.Address = address;
-            Images.Add(image);
         }
-
+        
         public Guid Id { get; private set; }
-
         public string Name { get; private set; }
-
         public int Stars { get; private set; }
-
         public Address Address { get; private set; }
-        
-        public static List<Image>  Images { get;  set; }
-        
-        public HotelFacility HotelFacility { get; set; }
-
         public IEnumerable<HotelFacility> Facilities => _facilities.AsReadOnly();
-        
-
+        public IEnumerable<Image> Images => _images.AsReadOnly();
         public bool IsDeleted { get; set; }
 
+        
         public void Modify(string name, int stars)
         {
             this.Name = name;
@@ -55,27 +46,30 @@ namespace HotelManagement.Domain.Models.Models.Hotels
             this._facilities.Add(facility);
         }
         
-        public void DeleteFacility(HotelFacility hotelFacility)
+        public void DeleteFacility(Guid facilityId)
         {
-            this._facilities.Remove(hotelFacility);
-            IsDeleted = true;
+            var facility = _facilities.FirstOrDefault(f => f.Id == facilityId);
+            this._facilities.Remove(facility); 
         }
         
-        public void ModifyFacility(string name , string description)
+        public void ModifyFacility(Guid id,string name , string description)
         {
-            HotelFacility.Name = name;
-            HotelFacility.Description = description;
+            var facility = _facilities.FirstOrDefault(f => f.Id == id);
+
+            
+            facility.Name = name;
+            facility.Description = description;
         }
 
-        public static void AddImage(Image image)
+        public void AddImage(Image image)
         {
-            IsAbleToAddImage();
-            Images.Add(image);
+            IfIsAbleToAddImage();
+            _images.Add(image);
         }
 
-        public List<Image> ShowHotelImage()
+        public List<Image> GetHotelImages()
         {
-            return Images;
+            return _images;
         }
 
 
@@ -98,11 +92,12 @@ namespace HotelManagement.Domain.Models.Models.Hotels
             }
         }
 
-        private static bool IsAbleToAddImage()
+        private bool IfIsAbleToAddImage()
         {
-            var InvalidCountInsertImage = (Images.Count < 5);
+            const int maxImagesCount = 5;
+            var invalidImagesCount = (_images.Count < maxImagesCount);
 
-            if (InvalidCountInsertImage)
+            if (invalidImagesCount)
             {
                 throw new InvlidInsertCountImageException();
             }
