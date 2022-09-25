@@ -56,7 +56,6 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         {
             var facility = _facilities.FirstOrDefault(f => f.Id == id);
 
-            
             facility.Name = name;
             facility.Description = description;
         }
@@ -95,7 +94,7 @@ namespace HotelManagement.Domain.Models.Models.Hotels
         private bool IfIsAbleToAddImage()
         {
             const int maxImagesCount = 5;
-            var invalidImagesCount = (_images.Count < maxImagesCount);
+            var invalidImagesCount = (_images.Count > maxImagesCount);
 
             if (invalidImagesCount)
             {
