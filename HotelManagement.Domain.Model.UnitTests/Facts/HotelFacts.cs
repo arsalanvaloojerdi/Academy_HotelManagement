@@ -72,7 +72,18 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
             hotelFacility.Name.Should().Be(TransportFacility.Name);
             hotelFacility.Description.Should().Be(TransportFacility.Description);
         }
-        
+
+        [Fact]
+        public void HotelFacility_Must_Be_Deleted()
+        {
+            var hotel = CreateSomeHotel();
+            var hotelFacility = CreateSomeHotelFacility();
+            
+            hotel.AddFacility(hotelFacility);
+            hotel.DeleteFacility(hotelFacility.Id);
+
+            hotel.Facilities.Should().HaveCount(0);
+        }
         
         #region PrivateMethods
 
