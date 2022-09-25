@@ -59,6 +59,20 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
 
             hotel.Images.Should().HaveCount(1);
         }
+
+        [Fact]
+        public void HotelFacility_Must_Be_Modified()
+        {
+            var hotel = CreateSomeHotel();
+            var hotelFacility = CreateSomeHotelFacility();
+            
+            hotel.AddFacility(hotelFacility);
+            hotel.ModifyFacility(hotelFacility.Id , TransportFacility.Name,TransportFacility.Description);
+
+            hotelFacility.Name.Should().Be(TransportFacility.Name);
+            hotelFacility.Description.Should().Be(TransportFacility.Description);
+        }
+        
         
         #region PrivateMethods
 
@@ -77,9 +91,9 @@ namespace HotelManagement.Domain.Models.UnitTests.Facts
             return new Hotel(DariushHotel.Name, DariushHotel.Stars, DariushHotel.Address);
         }
 
-        private static HotelFacility GetSomeHotelFacility()
+        private static HotelFacility CreateSomeHotelFacility()
         {
-            return new HotelFacility(Facilities.SwimmingFacility,Facilities.SwimmingFacilityDescription);
+            return new  HotelFacility(Facilities.SwimmingFacility, Facilities.SwimmingFacilityDescription);
         }
 
         #endregion
