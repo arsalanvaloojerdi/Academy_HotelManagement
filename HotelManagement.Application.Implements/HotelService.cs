@@ -58,17 +58,32 @@ namespace HotelManagement.Application.Implements
             await _unitOfWork.Commit();
         }
 
-        public async Task AddFacilityAsync(AddFacilityDto dto)
+        public async Task AddHotelImageAsync(AddImageDto dto)
         {
             var hotel = await _hotelRepository.GetByIdAsync(dto.HotelId);
-            var facility = new HotelFacility(dto.Name, dto.Description);
-
-            hotel.AddFacility(facility);
-
+            
+            hotel.AddImage(dto.Image);
+            
             await _unitOfWork.Commit();
         }
 
+       
+        public async Task<ShowHotelImagesDto> ShowHotelImageAsync(Guid hotelId)
+        {
+           var hotel = await _hotelRepository.GetByIdAsync(hotelId); 
+           var hotelImages= hotel.GetHotelImages();
+           return MapToShowImageDto(hotelImages);
+        }
+
         #region PrivateMethods
+
+        private ShowHotelImagesDto MapToShowImageDto(List<Image> images)
+        {
+            var imageDto = new ShowHotelImagesDto();
+            images.ForEach(image => imageDto.Images.Add(image));
+
+            return imageDto;
+        }
 
         private static HotelDto MapToDto(Hotel hotel)
         {
@@ -91,11 +106,11 @@ namespace HotelManagement.Application.Implements
                 Address = hotel.Address.Details
             };
         }
-
+        
         private static Hotel MapToHotel(RegisterHotelDto dto)
         {
             var address = new Address(dto.City, dto.AddressDetails);
-            var hotel = new Hotel(dto.Name, dto.Stars, address);
+            var hotel = new Hotel(dto.Name, dto.Stars, address );
             return hotel;
         }
 

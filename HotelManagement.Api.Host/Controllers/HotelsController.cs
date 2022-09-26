@@ -11,6 +11,7 @@ namespace HotelManagement.Api.Host.Controllers
     public class HotelsController : ApiControllerBase
     {
         private readonly IHotelService _hotelService;
+        private readonly IHotelFacilityService _hotelFacilityService;
 
         public HotelsController(IHotelService hotelService)
         {
@@ -82,9 +83,55 @@ namespace HotelManagement.Api.Host.Controllers
         {
             dto.HotelId = id;
 
-            await _hotelService.AddFacilityAsync(dto);
+            await _hotelFacilityService.AddFacilityAsync(dto);
 
             return OkResult(ApiMessages.Ok);
+        }
+
+        [HttpDelete("{id}/facilities/facilityId")]
+        public async Task<IActionResult> DeleteFacility(Guid id, DeleteFacilityDto dto)
+        {
+            dto.Id = id;
+
+            await _hotelFacilityService.DeleteFacilityAsync(dto);
+
+            return OkResult(ApiMessages.Ok);
+        }
+
+        [HttpPut("{id}/facilities/{facilityId}")]
+        public async Task<IActionResult> ModifyFacility(Guid id, ModifyHotelFacilityDto dto)
+        {
+            dto.Id = id;      
+            
+            await _hotelFacilityService.ModifyHotelFacilityAsync(dto);
+
+            return OkResult(ApiMessages.Ok);
+        }
+        
+        [HttpGet("{id}/facilities")]
+        public async Task<IActionResult> GetHotelFacilities(Guid id)
+        {
+            var hotels = await _hotelFacilityService.GetAllHotelFacilitiesAsync(id);
+
+            return OkResult(ApiMessages.Ok, hotels);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> AddHotelImage(Guid id, AddImageDto dto)
+        {
+            dto.HotelId = id;
+            
+            await _hotelService.AddHotelImageAsync(dto);
+
+            return OkResult(ApiMessages.Ok);
+        }
+
+        [HttpGet ("{id}")]
+        public async Task<IActionResult> GetHotelImage(Guid id)
+        {
+            await _hotelService.ShowHotelImageAsync(id);
+            
+            return  OkResult(ApiMessages.Ok);
         }
     }
 }

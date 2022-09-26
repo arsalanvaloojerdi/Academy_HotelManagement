@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace HotelManagement.Application.Interfaces.Hotels.Dtos
 {
-    public class ModifyHotelDto
+    public class ModifyHotelFacilityDto 
     {
         public Guid HotelId { get; set; }
         
@@ -10,6 +10,6 @@ namespace HotelManagement.Application.Interfaces.Hotels.Dtos
 
         public string Name { get; set; }
 
-        public int Stars { get; set; }
+        public string description { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using HotelManagement.Domain.Models.Models.Hotels.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Infrastructure.Persistence.Repositories
@@ -21,7 +22,7 @@ namespace HotelManagement.Infrastructure.Persistence.Repositories
             return await _context.Hotels
                 .ToListAsync();
         }
-
+        
         public async Task<Hotel> GetByIdAsync(Guid id)
         {
             return await _context.Hotels
@@ -31,6 +32,16 @@ namespace HotelManagement.Infrastructure.Persistence.Repositories
         public void Add(Hotel hotel)
         {
             _context.Hotels.Add(hotel);
+        }
+
+        public void AddImage(Hotel hotel)
+        {
+            _context.Hotels.Add(hotel);
+        }
+
+        public void Delete(Hotel hotel)
+        {
+         _context.Remove(hotel);
         }
     }
 }

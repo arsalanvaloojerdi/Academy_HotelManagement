@@ -11,10 +11,10 @@ namespace HotelManagement.Domain.Models.Models.Hotels.Entities
             this.Description = description;
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get;  set; }
 
-        public string Name { get; private set; }
+        public string Name { get;  set; }
 
-        public string Description { get; private set; }
+        public string Description { get;  set; }
     }
 }
